@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </script>
+    <title>Video-js</title>
+</head>
+<body>
+    <video id="myvideo" width="320" height="240" controls style="background:black">
+        <source class="active" src="video1.mp4" type="video/mp4" />
+        <source src="video2.mp4" type="video/mp4" />
+      </video>
+</body>
+<script>
+    var myvid = document.getElementById('myvideo');
+
+myvid.addEventListener('ended', function(e) {
+  // get the active source and the next video source.
+  // I set it so if there's no next, it loops to the first one
+  var activesource = document.querySelector("#myvideo source.active");
+  var nextsource = document.querySelector("#myvideo source.active + source") || document.querySelector("#myvideo source:first-child");
+  
+  // deactivate current source, and activate next one
+  activesource.className = "";
+  nextsource.className = "active";
+  
+  // update the video source and play
+  myvid.src = nextsource.src;
+  myvid.play();
+});
+</script>
+</html>
